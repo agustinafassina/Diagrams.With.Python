@@ -1,0 +1,6 @@
+{
+  "region": "sa-east-1",
+  "components": {
+    "route53": "agustinafassina.com"
+  }
+}
