@@ -2,13 +2,13 @@
 This repository contains several diagrams generated with Python, designed to create visual diagrams automatically through code. The goal is to facilitate the reproduction and visual documentation of our infrastructure, enabling us to replicate what is defined in Terraform and convert it into clear, up-to-date diagrams.
 
 ### Structure
-└─ .gitignore  <br>
-└─ config.json <br>
+└─ .gitignore  ✅<br>
+└─ config.json ✅<br>
 └─ json-read.py <br>
-└─ project-1.py <br>
-└─ project-2.py <br>
-└─ project-3.py <br>
-└─ project-4.py <br>
+└─ project-1.py ✅<br>
+└─ project-2.py ✅<br>
+└─ project-3.py ✅<br>
+└─ project-4.py ✅<br>
 └─ project-5.py <br>
 └─ README.md
 
