@@ -1,6 +1,20 @@
 {
   "region": "sa-east-1",
   "components": {
-    "route53": "agustinafassina.com"
+    "route53": "agustinafassina.com",
+    "load_balancer": "lb-agustinafassina",
+    "ecs_service": "ecs-service",
+    "ec2_instance": "ubuntu-instance",
+    "database": "Sql Server",
+    "cloudwatch": "docker-log",
+    "roles": {
+      "ec2_role": "ec2-role",
+      "ecs_role": "ecs-role"
+    },
+    "security_groups": {
+      "rds_sg": "security-rds",
+      "ec2_sg": "security-ec2",
+      "ecs_sg": "security-ecs"
+    }
   }
 }
