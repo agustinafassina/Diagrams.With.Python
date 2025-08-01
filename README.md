@@ -17,7 +17,7 @@ This repository contains several diagrams generated with Python, designed to cre
 From root:
 
 ```
-python project1.py
+python project-1.py
 # Result: project-1.png
 ```
 
@@ -26,4 +26,4 @@ python project1.py
 - In the diagram: 'show=True' will automatically open a preview of the generated diagram using the default image viewer.# Setting it to 'False' will generate the diagram without opening it automatically.
 
 #### Repository version
-v 0.1.0
+v 0.2.0
