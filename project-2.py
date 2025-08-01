@@ -3,7 +3,11 @@ from diagrams.aws.compute import EC2
 from diagrams.aws.network import VPC
 from diagrams.aws.database import RDS
 
-with Diagram("project-2", show=True):
+folder_name = "project-2"
+file_name = "project-2"
+full_name = f"{folder_name}/{file_name}"
+
+with Diagram(full_name, show=True):
     with Cluster("Region: us-east-1"):
 
         vpc = VPC("VPC")

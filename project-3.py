@@ -3,8 +3,12 @@ from diagrams.aws.compute import EC2, ECS
 from diagrams.aws.network import ELB, Route53
 from diagrams.aws.database import RDS
 
-with Diagram("project-3", show=True):
-    with Cluster("Region: us-east-1"):
+folder_name = "project-3"
+file_name = "project-3"
+full_name = f"{folder_name}/{file_name}"
+
+with Diagram(full_name, show=True):
+    with Cluster("Region: sa-east-1"):
         vpc = Cluster("VPC")
 
         with vpc:

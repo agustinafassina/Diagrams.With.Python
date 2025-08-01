@@ -2,7 +2,11 @@ from diagrams import Diagram, Cluster
 from diagrams.aws.compute import EC2
 from diagrams.aws.database import RDS
 
-with Diagram("project-1", show=True):
+folder_name = "project-1"
+file_name = "project-1"
+full_name = f"{folder_name}/{file_name}"
+
+with Diagram(full_name, show=True):
     with Cluster("AWS"):
         ec2_instance = EC2("EC2 Instance")
         database = RDS("Database")

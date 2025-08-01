@@ -6,7 +6,11 @@ from diagrams.aws.security import IAMRole, ACM
 from diagrams.aws.management import Cloudwatch
 from diagrams.aws.engagement import SES
 
-with Diagram("project-5", show=True):
+folder_name = "project-5"
+file_name = "project-5"
+full_name = f"{folder_name}/{file_name}"
+
+with Diagram(full_name, show=True):
     with Cluster("Region: us-east-1"):
         vpc = Cluster("VPC")
         with vpc:
