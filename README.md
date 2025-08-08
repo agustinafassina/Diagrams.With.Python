@@ -9,6 +9,7 @@ This repository contains several diagrams generated with Python, designed to cre
 ### Structure
 └─ .gitignore  <br>
 └─ config.json <br>
+└─ diagram-terra.py ✅<br>
 └─ json-read.py ✅<br>
 └─ project-1.py ✅<br>
 └─ project-2.py ✅<br>
