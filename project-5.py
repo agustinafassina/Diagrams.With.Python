@@ -6,7 +6,7 @@ from diagrams.aws.security import IAMRole, ACM
 from diagrams.aws.management import Cloudwatch
 from diagrams.aws.engagement import SES
 
-folder_name = "project-5"
+folder_name = "examples"
 file_name = "project-5"
 full_name = f"{folder_name}/{file_name}"
 

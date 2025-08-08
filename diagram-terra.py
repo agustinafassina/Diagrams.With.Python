@@ -17,7 +17,7 @@ ec2_role_name = "ec2 rolee"
 ecs_role_name = "ecs rolee"
 ecs_name = "ECS name"
 certificate_arn = "SSL"
-profile = "aws_diagram"
+profile = "examples/diagram-terra"
 ecs_services = ["ecs-cluster-ui", "ecs-service-api", "ecs-service-api-2"]
 
 with Diagram(profile, show=False, direction="TB"):

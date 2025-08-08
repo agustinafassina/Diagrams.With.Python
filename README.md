@@ -11,7 +11,7 @@ This repository contains several diagrams generated with Python, designed to cre
 └─ config.json <br>
 └─ diagram-terra.py ✅<br>
 └─ json-read.py ✅<br>
-└─ project-1.py ✅<br>
+└─ rds-ec2.py ✅<br>
 └─ project-2.py ✅<br>
 └─ project-3.py ✅<br>
 └─ project-4.py ✅<br>

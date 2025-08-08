@@ -13,7 +13,7 @@ region_name = config['region']
 components = config['components']
 roles = components['roles']
 security_groups = components['security_groups']
-file_name = "project-json"
+file_name = "examples/project-json"
 
 with Diagram(file_name, show=True):
     with Cluster(f"Region: {region_name}"):

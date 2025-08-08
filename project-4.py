@@ -4,7 +4,7 @@ from diagrams.aws.network import  ELB, Route53
 from diagrams.aws.database import RDS
 from diagrams.aws.security import IAMRole
 
-folder_name = "project-4"
+folder_name = "examples"
 file_name = "project-4"
 full_name = f"{folder_name}/{file_name}"
 
