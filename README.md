@@ -1,6 +1,10 @@
 # Diagrams with python
 This repository contains several diagrams generated with Python, designed to create visual diagrams automatically through code. The goal is to facilitate the reproduction and visual documentation of our infrastructure, enabling us to replicate what is defined in Terraform and convert it into clear, up-to-date diagrams.
 
+<div align="center">
+  <img src="diagram.png" alt="Diagram" width="780" height="450">
+</div>
+
 ### Structure
 └─ .gitignore  <br>
 └─ config.json <br>
