@@ -3,7 +3,7 @@ This repository contains several diagrams generated with Python, designed to cre
 
 ### Examples:
 <div align="center">
-  <img src="diagram.png" alt="Diagram" width="780" height="450">
+  <img src="examples/project-2.png" alt="Diagram" width="280" height="140">
 </div>
 
 ### Structure
