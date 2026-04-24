@@ -11,8 +11,11 @@ Collection of infrastructure diagrams built as code with [Diagrams](https://diag
 ### Diagram examples
 
 <div align="left">
-    <img src="examples/project-4.png" alt="AWS diagram example (project-4)" width="400" height="400">
-    <img src="examples/project-json.png" alt="AWS diagram from JSON config" width="400" height="400">
+    <img src="examples/project-4.png" alt="AWS diagram example (project-4)" width="380" height="380">
+    <img src="examples/project-json.png" alt="AWS diagram from JSON config" width="380" height="380">
+</div>
+<div align="left">
+    <img src="examples/ci-cd-bitbucket-azure-aws.png" alt="CI/CD Bitbucket Azure DevOps AWS" width="520">
 </div>
 
 ### Repository layout
@@ -39,26 +42,29 @@ Collection of infrastructure diagrams built as code with [Diagrams](https://diag
 - Python dependencies (pinned in `requirements.txt`):
 
 ```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# macOS / Linux: source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-A virtual environment (for example `.venv`) is recommended.
-
 ### How to run
 
-From the repository root:
+Always run scripts from the **repository root** so paths such as `config.json` and `examples/` resolve correctly.
 
 ```bash
 python project-4.py
 # Writes: examples/project-4.png
 ```
 
-Other entry points work the same way (`json-read.py`, `diagram-terra.py`, scripts under subfolders, etc.). Output paths are defined inside each script (usually under `examples/`).
+Other entry points work the same way (`json-read.py`, `diagram-terra.py`, `ci-cd-bitbucket-azure-aws.py`, scripts under subfolders, etc.). Each script sets its own output path (usually under `examples/`).
+
+Besides the PNG, Diagrams may leave a **Graphviz source file** next to it (same base name, often without a `.dot` extension). You can delete those files and regenerate them by running the script again.
 
 ### Tips
 
 - In `Diagram(...)`, `show=True` opens the image with the default viewer after generation; use `show=False` to only write the file.
-- Official node and layout reference: [Diagrams documentation](https://diagrams.mingrammer.com/docs/nodes/aws).
+- Getting started and layout options: [Diagrams — Getting started](https://diagrams.mingrammer.com/docs/getting-started/installation). AWS node catalog: [AWS nodes](https://diagrams.mingrammer.com/docs/nodes/aws).
 
 **Version:** 0.2.0
 
@@ -71,8 +77,11 @@ Conjunto de diagramas de infraestructura definidos como código con [Diagrams](h
 ### Ejemplos de diagramas
 
 <div align="left">
-    <img src="examples/project-4.png" alt="Ejemplo de diagrama AWS (project-4)" width="400" height="400">
-    <img src="examples/project-json.png" alt="Diagrama AWS desde JSON" width="400" height="400">
+    <img src="examples/project-4.png" alt="Ejemplo de diagrama AWS (project-4)" width="380" height="380">
+    <img src="examples/project-json.png" alt="Diagrama AWS desde JSON" width="380" height="380">
+</div>
+<div align="left">
+    <img src="examples/ci-cd-bitbucket-azure-aws.png" alt="CI/CD Bitbucket Azure DevOps AWS" width="520">
 </div>
 
 ### Estructura del repositorio
@@ -99,25 +108,31 @@ Conjunto de diagramas de infraestructura definidos como código con [Diagrams](h
 - Dependencias de Python (versiones fijadas en `requirements.txt`):
 
 ```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# macOS / Linux: source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Se recomienda un entorno virtual (por ejemplo `.venv`).
-
 ### Cómo ejecutar
 
-Desde la raíz del repositorio:
+Ejecutá los scripts siempre desde la **raíz del repositorio**, así `config.json` y la carpeta `examples/` se resuelven bien.
 
 ```bash
 python project-4.py
 # Genera: examples/project-4.png
 ```
 
-El resto de scripts se ejecuta de la misma forma (`json-read.py`, `diagram-terra.py`, los de las subcarpetas, etc.). La ruta de salida está en cada script (normalmente bajo `examples/`).
+El resto se corre igual (`json-read.py`, `diagram-terra.py`, `ci-cd-bitbucket-azure-aws.py`, los de subcarpetas, etc.). Cada script define su salida (casi siempre bajo `examples/`).
+
+Además del PNG, Diagrams puede dejar el **fuente Graphviz** al lado (mismo nombre, a veces sin extensión `.dot`). Podés borrarlo y regenerarlo volviendo a ejecutar el script.
 
 ### Comentarios y recomendaciones
 
 - En `Diagram(...)`, `show=True` abre la imagen con el visor predeterminado al terminar; con `show=False` solo se guarda el archivo.
-- Documentación oficial de nodos y diseño: [Diagrams (AWS)](https://diagrams.mingrammer.com/docs/nodes/aws).
+- Intro e instalación: [Diagrams — Getting started](https://diagrams.mingrammer.com/docs/getting-started/installation). Catálogo de nodos AWS: [AWS nodes](https://diagrams.mingrammer.com/docs/nodes/aws).
 
 **Versión:** 0.2.0
+
+©️ License
+By Agustina Fassina
