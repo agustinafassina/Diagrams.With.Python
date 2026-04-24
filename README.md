@@ -11,8 +11,11 @@ Collection of infrastructure diagrams built as code with [Diagrams](https://diag
 ### Diagram examples
 
 <div align="left">
-    <img src="examples/project-4.png" alt="AWS diagram example (project-4)" width="400" height="400">
-    <img src="examples/project-json.png" alt="AWS diagram from JSON config" width="400" height="400">
+    <img src="examples/project-4.png" alt="AWS diagram example (project-4)" width="380" height="380">
+    <img src="examples/project-json.png" alt="AWS diagram from JSON config" width="380" height="380">
+</div>
+<div align="left">
+    <img src="examples/ci-cd-bitbucket-azure-aws.png" alt="CI/CD Bitbucket Azure DevOps AWS" width="520">
 </div>
 
 ### Repository layout
@@ -22,6 +25,7 @@ Collection of infrastructure diagrams built as code with [Diagrams](https://diag
 | `requirements.txt` | Pinned Python dependency (`diagrams`) |
 | `config.json` | Labels and region used by `json-read.py` |
 | `diagram-terra.py` | Larger AWS / Azure DevOps style diagram |
+| `ci-cd-bitbucket-azure-aws.py` | Bitbucket → Azure DevOps (build + release) → AWS (ECR, Terraform, ECS, scans, email) |
 | `json-read.py` | Diagram driven by `config.json` |
 | `project-2.py` … `project-5.py` | Sample AWS topologies |
 | `rds-ec2.py` | Small RDS + EC2 example |
@@ -34,30 +38,33 @@ Collection of infrastructure diagrams built as code with [Diagrams](https://diag
 ### Prerequisites
 
 - Python 3.x  
-- [Graphviz](https://graphviz.org/download/) installed on the system (required by Diagrams)  
+- [Graphviz](https://graphviz.org/download/) installed on the system (required by Diagrams). On Windows, the installer often leaves `dot` off your `PATH`; add `C:\Program Files\Graphviz\bin` to the user **PATH** and open a new terminal, or run once per session in PowerShell: `$env:Path = "C:\Program Files\Graphviz\bin;" + $env:Path`  
 - Python dependencies (pinned in `requirements.txt`):
 
 ```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# macOS / Linux: source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-A virtual environment (for example `.venv`) is recommended.
-
 ### How to run
 
-From the repository root:
+Always run scripts from the **repository root** so paths such as `config.json` and `examples/` resolve correctly.
 
 ```bash
 python project-4.py
 # Writes: examples/project-4.png
 ```
 
-Other entry points work the same way (`json-read.py`, `diagram-terra.py`, scripts under subfolders, etc.). Output paths are defined inside each script (usually under `examples/`).
+Other entry points work the same way (`json-read.py`, `diagram-terra.py`, `ci-cd-bitbucket-azure-aws.py`, scripts under subfolders, etc.). Each script sets its own output path (usually under `examples/`).
+
+Besides the PNG, Diagrams may leave a **Graphviz source file** next to it (same base name, often without a `.dot` extension). You can delete those files and regenerate them by running the script again.
 
 ### Tips
 
 - In `Diagram(...)`, `show=True` opens the image with the default viewer after generation; use `show=False` to only write the file.
-- Official node and layout reference: [Diagrams documentation](https://diagrams.mingrammer.com/docs/nodes/aws).
+- Getting started and layout options: [Diagrams — Getting started](https://diagrams.mingrammer.com/docs/getting-started/installation). AWS node catalog: [AWS nodes](https://diagrams.mingrammer.com/docs/nodes/aws).
 
 **Version:** 0.2.0
 
@@ -70,8 +77,11 @@ Conjunto de diagramas de infraestructura definidos como código con [Diagrams](h
 ### Ejemplos de diagramas
 
 <div align="left">
-    <img src="examples/project-4.png" alt="Ejemplo de diagrama AWS (project-4)" width="400" height="400">
-    <img src="examples/project-json.png" alt="Diagrama AWS desde JSON" width="400" height="400">
+    <img src="examples/project-4.png" alt="Ejemplo de diagrama AWS (project-4)" width="380" height="380">
+    <img src="examples/project-json.png" alt="Diagrama AWS desde JSON" width="380" height="380">
+</div>
+<div align="left">
+    <img src="examples/ci-cd-bitbucket-azure-aws.png" alt="CI/CD Bitbucket Azure DevOps AWS" width="520">
 </div>
 
 ### Estructura del repositorio
@@ -81,6 +91,7 @@ Conjunto de diagramas de infraestructura definidos como código con [Diagrams](h
 | `requirements.txt` | Dependencia Python fijada (`diagrams`) |
 | `config.json` | Textos y región usados por `json-read.py` |
 | `diagram-terra.py` | Diagrama amplio con enfoque AWS / Azure DevOps |
+| `ci-cd-bitbucket-azure-aws.py` | Bitbucket → Azure DevOps (build + release) → AWS (ECR, Terraform, ECS, escaneos, email) |
 | `json-read.py` | Diagrama generado a partir de `config.json` |
 | `project-2.py` … `project-5.py` | Ejemplos de topologías AWS |
 | `rds-ec2.py` | Ejemplo pequeño RDS + EC2 |
@@ -93,29 +104,35 @@ Conjunto de diagramas de infraestructura definidos como código con [Diagrams](h
 ### Requisitos
 
 - Python 3.x  
-- [Graphviz](https://graphviz.org/download/) instalado en el sistema (lo exige la librería Diagrams)  
+- [Graphviz](https://graphviz.org/download/) instalado en el sistema (lo exige la librería Diagrams). En Windows, si aparece `ExecutableNotFound: failed to execute WindowsPath('dot')`, agregá `C:\Program Files\Graphviz\bin` al **PATH** del usuario y abrí una terminal nueva, o en PowerShell por sesión: `$env:Path = "C:\Program Files\Graphviz\bin;" + $env:Path`  
 - Dependencias de Python (versiones fijadas en `requirements.txt`):
 
 ```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# macOS / Linux: source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Se recomienda un entorno virtual (por ejemplo `.venv`).
-
 ### Cómo ejecutar
 
-Desde la raíz del repositorio:
+Ejecutá los scripts siempre desde la **raíz del repositorio**, así `config.json` y la carpeta `examples/` se resuelven bien.
 
 ```bash
 python project-4.py
 # Genera: examples/project-4.png
 ```
 
-El resto de scripts se ejecuta de la misma forma (`json-read.py`, `diagram-terra.py`, los de las subcarpetas, etc.). La ruta de salida está en cada script (normalmente bajo `examples/`).
+El resto se corre igual (`json-read.py`, `diagram-terra.py`, `ci-cd-bitbucket-azure-aws.py`, los de subcarpetas, etc.). Cada script define su salida (casi siempre bajo `examples/`).
+
+Además del PNG, Diagrams puede dejar el **fuente Graphviz** al lado (mismo nombre, a veces sin extensión `.dot`). Podés borrarlo y regenerarlo volviendo a ejecutar el script.
 
 ### Comentarios y recomendaciones
 
 - En `Diagram(...)`, `show=True` abre la imagen con el visor predeterminado al terminar; con `show=False` solo se guarda el archivo.
-- Documentación oficial de nodos y diseño: [Diagrams (AWS)](https://diagrams.mingrammer.com/docs/nodes/aws).
+- Intro e instalación: [Diagrams — Getting started](https://diagrams.mingrammer.com/docs/getting-started/installation). Catálogo de nodos AWS: [AWS nodes](https://diagrams.mingrammer.com/docs/nodes/aws).
 
 **Versión:** 0.2.0
+
+©️ License
+By Agustina Fassina
