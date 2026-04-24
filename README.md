@@ -22,6 +22,7 @@ Collection of infrastructure diagrams built as code with [Diagrams](https://diag
 | `requirements.txt` | Pinned Python dependency (`diagrams`) |
 | `config.json` | Labels and region used by `json-read.py` |
 | `diagram-terra.py` | Larger AWS / Azure DevOps style diagram |
+| `ci-cd-bitbucket-azure-aws.py` | Bitbucket → Azure DevOps (build + release) → AWS (ECR, Terraform, ECS, scans, email) |
 | `json-read.py` | Diagram driven by `config.json` |
 | `project-2.py` … `project-5.py` | Sample AWS topologies |
 | `rds-ec2.py` | Small RDS + EC2 example |
@@ -34,7 +35,7 @@ Collection of infrastructure diagrams built as code with [Diagrams](https://diag
 ### Prerequisites
 
 - Python 3.x  
-- [Graphviz](https://graphviz.org/download/) installed on the system (required by Diagrams)  
+- [Graphviz](https://graphviz.org/download/) installed on the system (required by Diagrams). On Windows, the installer often leaves `dot` off your `PATH`; add `C:\Program Files\Graphviz\bin` to the user **PATH** and open a new terminal, or run once per session in PowerShell: `$env:Path = "C:\Program Files\Graphviz\bin;" + $env:Path`  
 - Python dependencies (pinned in `requirements.txt`):
 
 ```bash
@@ -81,6 +82,7 @@ Conjunto de diagramas de infraestructura definidos como código con [Diagrams](h
 | `requirements.txt` | Dependencia Python fijada (`diagrams`) |
 | `config.json` | Textos y región usados por `json-read.py` |
 | `diagram-terra.py` | Diagrama amplio con enfoque AWS / Azure DevOps |
+| `ci-cd-bitbucket-azure-aws.py` | Bitbucket → Azure DevOps (build + release) → AWS (ECR, Terraform, ECS, escaneos, email) |
 | `json-read.py` | Diagrama generado a partir de `config.json` |
 | `project-2.py` … `project-5.py` | Ejemplos de topologías AWS |
 | `rds-ec2.py` | Ejemplo pequeño RDS + EC2 |
@@ -93,7 +95,7 @@ Conjunto de diagramas de infraestructura definidos como código con [Diagrams](h
 ### Requisitos
 
 - Python 3.x  
-- [Graphviz](https://graphviz.org/download/) instalado en el sistema (lo exige la librería Diagrams)  
+- [Graphviz](https://graphviz.org/download/) instalado en el sistema (lo exige la librería Diagrams). En Windows, si aparece `ExecutableNotFound: failed to execute WindowsPath('dot')`, agregá `C:\Program Files\Graphviz\bin` al **PATH** del usuario y abrí una terminal nueva, o en PowerShell por sesión: `$env:Path = "C:\Program Files\Graphviz\bin;" + $env:Path`  
 - Dependencias de Python (versiones fijadas en `requirements.txt`):
 
 ```bash
