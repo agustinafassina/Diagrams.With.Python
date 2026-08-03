@@ -20,20 +20,35 @@ Collection of infrastructure diagrams built as code with [Diagrams](https://diag
 
 ### Repository layout
 
-| Path | Description |
-|------|-------------|
-| `requirements.txt` | Pinned Python dependency (`diagrams`) |
-| `config.json` | Labels and region used by `json-read.py` |
-| `diagram-terra.py` | Larger AWS / Azure DevOps style diagram |
-| `ci-cd-bitbucket-azure-aws.py` | Bitbucket → Azure DevOps (build + release) → AWS (ECR, Terraform, ECS, scans, email) |
-| `json-read.py` | Diagram driven by `config.json` |
-| `project-2.py` … `project-5.py` | Sample AWS topologies |
-| `rds-ec2.py` | Small RDS + EC2 example |
-| `examples/` | Generated PNG outputs (paths used by the scripts) |
-| `big-diagram/` | Extended diagram (`with-gateway.py`, local `config.json`) |
-| `ec2-backup-with-s3/` | EC2 backup flow with S3 |
-| `ecs-fargate/` | ECS Fargate example |
-| `with-docker/` | Docker-related diagram |
+```text
+Diagrams.With.Python/
+├── requirements.txt
+├── examples/                         # Shared PNG gallery (samples, CI/CD, diagram-terra)
+├── samples/                          # Small AWS topologies + JSON-driven diagram
+│   ├── config.json
+│   ├── json-read.py
+│   ├── project-2.py … project-5.py
+│   └── rds-ec2.py
+├── ci-cd/                            # Bitbucket → Azure DevOps → AWS
+│   └── ci-cd-bitbucket-azure-aws.py
+├── diagram-terra/                    # Larger AWS / Azure DevOps style diagram
+│   └── diagram-terra.py
+├── big-diagram/                      # Extended gateway topology (+ local config.json)
+├── ec2-backup-with-s3/               # EC2 → S3 backup
+├── ecs-fargate/                      # ECS Fargate
+└── with-docker/                      # Docker-related diagram (+ local config.json)
+```
+
+| Folder | Script | Output |
+|--------|--------|--------|
+| `samples/` | `project-4.py` | `examples/project-4.png` |
+| `samples/` | `json-read.py` | `examples/project-json.png` |
+| `ci-cd/` | `ci-cd-bitbucket-azure-aws.py` | `examples/ci-cd-bitbucket-azure-aws.png` |
+| `diagram-terra/` | `diagram-terra.py` | `examples/diagram-terra.png` |
+| `big-diagram/` | `with-gateway.py` | `big-diagram/with-gateway-diagram.png` |
+| `ec2-backup-with-s3/` | `backup.py` | `ec2-backup-with-s3/backup.png` |
+| `ecs-fargate/` | `fargate.py` | `ecs-fargate/diagram.png` |
+| `with-docker/` | `with-dockers.py` | `with-docker/with-dockers-diagram.png` |
 
 ### Prerequisites
 
@@ -50,14 +65,15 @@ pip install -r requirements.txt
 
 ### How to run
 
-Always run scripts from the **repository root** so paths such as `config.json` and `examples/` resolve correctly.
+Scripts resolve config and output paths from their own location, so you can run them from any working directory:
 
 ```bash
-python project-4.py
+python samples/project-4.py
 # Writes: examples/project-4.png
-```
 
-Other entry points work the same way (`json-read.py`, `diagram-terra.py`, `ci-cd-bitbucket-azure-aws.py`, scripts under subfolders, etc.). Each script sets its own output path (usually under `examples/`).
+python ci-cd/ci-cd-bitbucket-azure-aws.py
+# Writes: examples/ci-cd-bitbucket-azure-aws.png
+```
 
 Besides the PNG, Diagrams may leave a **Graphviz source file** next to it (same base name, often without a `.dot` extension). You can delete those files and regenerate them by running the script again.
 
@@ -86,20 +102,35 @@ Conjunto de diagramas de infraestructura definidos como código con [Diagrams](h
 
 ### Estructura del repositorio
 
-| Ruta | Descripción |
-|------|-------------|
-| `requirements.txt` | Dependencia Python fijada (`diagrams`) |
-| `config.json` | Textos y región usados por `json-read.py` |
-| `diagram-terra.py` | Diagrama amplio con enfoque AWS / Azure DevOps |
-| `ci-cd-bitbucket-azure-aws.py` | Bitbucket → Azure DevOps (build + release) → AWS (ECR, Terraform, ECS, escaneos, email) |
-| `json-read.py` | Diagrama generado a partir de `config.json` |
-| `project-2.py` … `project-5.py` | Ejemplos de topologías AWS |
-| `rds-ec2.py` | Ejemplo pequeño RDS + EC2 |
-| `examples/` | PNG generados (rutas que usan los scripts) |
-| `big-diagram/` | Diagrama extendido (`with-gateway.py`, `config.json` local) |
-| `ec2-backup-with-s3/` | Flujo de backup EC2 con S3 |
-| `ecs-fargate/` | Ejemplo con ECS Fargate |
-| `with-docker/` | Diagrama relacionado con Docker |
+```text
+Diagrams.With.Python/
+├── requirements.txt
+├── examples/                         # Galería PNG compartida (samples, CI/CD, diagram-terra)
+├── samples/                          # Topologías AWS pequeñas + diagrama desde JSON
+│   ├── config.json
+│   ├── json-read.py
+│   ├── project-2.py … project-5.py
+│   └── rds-ec2.py
+├── ci-cd/                            # Bitbucket → Azure DevOps → AWS
+│   └── ci-cd-bitbucket-azure-aws.py
+├── diagram-terra/                    # Diagrama amplio AWS / Azure DevOps
+│   └── diagram-terra.py
+├── big-diagram/                      # Topología con gateway (+ config.json local)
+├── ec2-backup-with-s3/               # Backup EC2 → S3
+├── ecs-fargate/                      # ECS Fargate
+└── with-docker/                      # Diagrama con Docker (+ config.json local)
+```
+
+| Carpeta | Script | Salida |
+|---------|--------|--------|
+| `samples/` | `project-4.py` | `examples/project-4.png` |
+| `samples/` | `json-read.py` | `examples/project-json.png` |
+| `ci-cd/` | `ci-cd-bitbucket-azure-aws.py` | `examples/ci-cd-bitbucket-azure-aws.png` |
+| `diagram-terra/` | `diagram-terra.py` | `examples/diagram-terra.png` |
+| `big-diagram/` | `with-gateway.py` | `big-diagram/with-gateway-diagram.png` |
+| `ec2-backup-with-s3/` | `backup.py` | `ec2-backup-with-s3/backup.png` |
+| `ecs-fargate/` | `fargate.py` | `ecs-fargate/diagram.png` |
+| `with-docker/` | `with-dockers.py` | `with-docker/with-dockers-diagram.png` |
 
 ### Requisitos
 
@@ -116,14 +147,15 @@ pip install -r requirements.txt
 
 ### Cómo ejecutar
 
-Ejecutá los scripts siempre desde la **raíz del repositorio**, así `config.json` y la carpeta `examples/` se resuelven bien.
+Los scripts resuelven config y salidas desde su propia ubicación, así que podés ejecutarlos desde cualquier directorio de trabajo:
 
 ```bash
-python project-4.py
+python samples/project-4.py
 # Genera: examples/project-4.png
-```
 
-El resto se corre igual (`json-read.py`, `diagram-terra.py`, `ci-cd-bitbucket-azure-aws.py`, los de subcarpetas, etc.). Cada script define su salida (casi siempre bajo `examples/`).
+python ci-cd/ci-cd-bitbucket-azure-aws.py
+# Genera: examples/ci-cd-bitbucket-azure-aws.png
+```
 
 Además del PNG, Diagrams puede dejar el **fuente Graphviz** al lado (mismo nombre, a veces sin extensión `.dot`). Podés borrarlo y regenerarlo volviendo a ejecutar el script.
 
@@ -134,5 +166,5 @@ Además del PNG, Diagrams puede dejar el **fuente Graphviz** al lado (mismo nomb
 
 **Versión:** 0.2.0
 
-©️ License
+©️ License  
 By Agustina Fassina
