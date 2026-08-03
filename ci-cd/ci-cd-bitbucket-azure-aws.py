@@ -1,5 +1,5 @@
 from pathlib import Path
-from diagrams import Diagram, Cluster, Node
+from diagrams import Diagram, Cluster, Edge, Node
 from diagrams.onprem.vcs import Git
 from diagrams.onprem.container import Docker
 from diagrams.onprem.iac import Terraform
@@ -13,7 +13,9 @@ from diagrams.aws.engagement import SES
 
 full_name = str(Path(__file__).resolve().parents[1] / "examples" / "ci-cd-bitbucket-azure-aws")
 
-with Diagram(full_name, show=False, direction="LR"):
+graph_attr = {"splines": "ortho", "nodesep": "0.55", "ranksep": "0.70"}
+
+with Diagram(full_name, show=False, direction="LR", graph_attr=graph_attr):
     # Bitbucket has no icon in this library; Git icon + label is a common stand-in.
     bitbucket = Git("Bitbucket")
 
@@ -28,37 +30,55 @@ with Diagram(full_name, show=False, direction="LR"):
     docker >> registry
 
     with Cluster("Azure DevOps — Release"):
-        release = Pipelines("Release (triggered by build)")
-        branch_env = Node("Branch → environment\ndevelop → QA\nmaster → Prod")
-        tf_cd = Terraform("terraform apply")
-        docgen = Node("Scripts\ndocumentation\nfrom infra")
+        release = Pipelines("Release\n(triggered by build)")
+        docgen = Node("Scripts\ndocs from infra")
         scan = Inspector("Image scan\n& reports")
         mail = SES("Email\n(scan reports)")
+        s3_docs = S3("S3\n(docs / artifacts)")
 
-        release >> branch_env >> tf_cd
-        release >> docgen
+        release >> docgen >> s3_docs
         release >> scan >> mail
+        registry >> scan
 
-    bitbucket >> build
-    build >> release
-    registry >> scan
+    bitbucket >> build >> release
 
-    with Cluster("AWS (runtime)"):
-        alb = ELB("Load balancer")
-        ecs_svc = ElasticContainerServiceService("ECS service")
-        ecs_cluster = ECS("ECS cluster")
-        asg = EC2AutoScaling("Auto Scaling")
-        lt = Node("Launch\ntemplate")
-        ec2 = EC2("EC2")
-        cw = Cloudwatch("CloudWatch")
-        s3_docs = S3("S3 (docs / artifacts)")
+    with Cluster("QA — develop"):
+        qa_tf = Terraform("terraform apply\n(QA)")
+        with Cluster("AWS QA"):
+            qa_alb = ELB("ALB")
+            qa_ecs_svc = ElasticContainerServiceService("ECS service")
+            qa_ecs = ECS("ECS cluster")
+            qa_asg = EC2AutoScaling("Auto Scaling")
+            qa_lt = Node("Launch\ntemplate")
+            qa_ec2 = EC2("EC2")
+            qa_cw = Cloudwatch("CloudWatch")
 
-        alb >> ecs_svc >> ecs_cluster
-        ecs_svc >> registry
-        asg >> ec2
-        lt >> asg
-        ecs_svc >> cw
+            qa_alb >> qa_ecs_svc >> qa_ecs
+            qa_ecs_svc >> registry
+            qa_lt >> qa_asg >> qa_ec2
+            qa_ecs_svc >> qa_cw
 
-    tf_cd >> ecs_svc
-    tf_cd >> asg
-    docgen >> s3_docs
+        qa_tf >> qa_ecs_svc
+        qa_tf >> qa_asg
+
+    with Cluster("Prod — master"):
+        prod_tf = Terraform("terraform apply\n(Prod)")
+        with Cluster("AWS Prod"):
+            prod_alb = ELB("ALB")
+            prod_ecs_svc = ElasticContainerServiceService("ECS service")
+            prod_ecs = ECS("ECS cluster")
+            prod_asg = EC2AutoScaling("Auto Scaling")
+            prod_lt = Node("Launch\ntemplate")
+            prod_ec2 = EC2("EC2")
+            prod_cw = Cloudwatch("CloudWatch")
+
+            prod_alb >> prod_ecs_svc >> prod_ecs
+            prod_ecs_svc >> registry
+            prod_lt >> prod_asg >> prod_ec2
+            prod_ecs_svc >> prod_cw
+
+        prod_tf >> prod_ecs_svc
+        prod_tf >> prod_asg
+
+    release >> Edge(label="develop") >> qa_tf
+    release >> Edge(label="master") >> prod_tf
