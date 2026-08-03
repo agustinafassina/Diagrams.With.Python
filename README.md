@@ -29,8 +29,10 @@ Diagrams.With.Python/
 │   ├── json-read.py
 │   ├── project-2.py … project-5.py
 │   └── rds-ec2.py
-├── ci-cd/                            # Bitbucket → Azure DevOps → AWS
+├── ci-cd/                            # Bitbucket → Azure DevOps → AWS (QA develop / Prod master)
 │   └── ci-cd-bitbucket-azure-aws.py
+├── multi-region-dr/                  # Route 53 failover across two AWS regions
+│   └── route53-failover.py
 ├── diagram-terra/                    # Larger AWS / Azure DevOps style diagram
 │   └── diagram-terra.py
 ├── big-diagram/                      # Extended gateway topology (+ local config.json)
@@ -44,6 +46,7 @@ Diagrams.With.Python/
 | `samples/` | `project-4.py` | `examples/project-4.png` |
 | `samples/` | `json-read.py` | `examples/project-json.png` |
 | `ci-cd/` | `ci-cd-bitbucket-azure-aws.py` | `examples/ci-cd-bitbucket-azure-aws.png` |
+| `multi-region-dr/` | `route53-failover.py` | `examples/multi-region-dr.png` |
 | `diagram-terra/` | `diagram-terra.py` | `examples/diagram-terra.png` |
 | `big-diagram/` | `with-gateway.py` | `big-diagram/with-gateway-diagram.png` |
 | `ec2-backup-with-s3/` | `backup.py` | `ec2-backup-with-s3/backup.png` |
@@ -84,14 +87,15 @@ Besides the PNG, Diagrams may leave a **Graphviz source file** next to it (same 
 
 **Version:** 0.2.0
 
+### License
+Released under the [MIT License](LICENSE). Copyright (c) 2026 Agustina Fassina.
+
 ---
 
 ## Español
-
 Conjunto de diagramas de infraestructura definidos como código con [Diagrams](https://diagrams.mingrammer.com/) en Python. El objetivo es que los gráficos sean reproducibles y coherentes con lo que definís en Terraform (u otras fuentes), para documentar de forma clara y actualizable.
 
 ### Ejemplos de diagramas
-
 <div align="left">
     <img src="examples/project-4.png" alt="Ejemplo de diagrama AWS (project-4)" width="380" height="380">
     <img src="examples/project-json.png" alt="Diagrama AWS desde JSON" width="380" height="380">
@@ -111,8 +115,10 @@ Diagrams.With.Python/
 │   ├── json-read.py
 │   ├── project-2.py … project-5.py
 │   └── rds-ec2.py
-├── ci-cd/                            # Bitbucket → Azure DevOps → AWS
+├── ci-cd/                            # Bitbucket → Azure DevOps → AWS (QA develop / Prod master)
 │   └── ci-cd-bitbucket-azure-aws.py
+├── multi-region-dr/                  # Failover Route 53 entre dos regiones AWS
+│   └── route53-failover.py
 ├── diagram-terra/                    # Diagrama amplio AWS / Azure DevOps
 │   └── diagram-terra.py
 ├── big-diagram/                      # Topología con gateway (+ config.json local)
@@ -126,6 +132,7 @@ Diagrams.With.Python/
 | `samples/` | `project-4.py` | `examples/project-4.png` |
 | `samples/` | `json-read.py` | `examples/project-json.png` |
 | `ci-cd/` | `ci-cd-bitbucket-azure-aws.py` | `examples/ci-cd-bitbucket-azure-aws.png` |
+| `multi-region-dr/` | `route53-failover.py` | `examples/multi-region-dr.png` |
 | `diagram-terra/` | `diagram-terra.py` | `examples/diagram-terra.png` |
 | `big-diagram/` | `with-gateway.py` | `big-diagram/with-gateway-diagram.png` |
 | `ec2-backup-with-s3/` | `backup.py` | `ec2-backup-with-s3/backup.png` |
@@ -166,5 +173,6 @@ Además del PNG, Diagrams puede dejar el **fuente Graphviz** al lado (mismo nomb
 
 **Versión:** 0.2.0
 
-©️ License  
-By Agustina Fassina
+### Licencia
+
+Publicado bajo la [licencia MIT](LICENSE). Copyright (c) 2026 Agustina Fassina.
