@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 from diagrams import Diagram, Cluster, Node
 from diagrams.aws.compute import EC2, ECS, Lambda, AutoScaling
 from diagrams.aws.network import ELB, Route53, APIGateway
@@ -7,14 +8,15 @@ from diagrams.aws.security import IAMRole, WAF
 from diagrams.aws.management import Cloudwatch
 from diagrams.aws.storage import S3
 
-with open('config.json') as f:
+here = Path(__file__).resolve().parent
+with open(here / "config.json") as f:
     config = json.load(f)
 
 region_name = config['region']
 components = config['components']
 roles = components['roles']
 security_groups = components['security_groups']
-file_name = "with-gateway-diagram"
+file_name = str(here / "with-gateway-diagram")
 
 with Diagram(file_name, show=True):
     with Cluster(f"Region: {region_name}"):

@@ -1,11 +1,10 @@
+from pathlib import Path
 from diagrams import Diagram, Cluster
 from diagrams.aws.compute import EC2
 from diagrams.aws.network import VPC
 from diagrams.aws.storage import S3
 
-folder_name = "ec2-backup-with-s3"
-file_name = "backup"
-full_name = f"{folder_name}/{file_name}"
+full_name = str(Path(__file__).resolve().parent / "backup")
 
 with Diagram(full_name, show=True):
     with Cluster("Region: sa-east-1"):

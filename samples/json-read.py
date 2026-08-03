@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 from diagrams import Diagram, Cluster, Node
 from diagrams.aws.compute import EC2, ECS
 from diagrams.aws.network import ELB, Route53
@@ -6,14 +7,15 @@ from diagrams.aws.database import RDS
 from diagrams.aws.security import IAMRole
 from diagrams.aws.management import Cloudwatch
 
-with open('config.json') as f:
+config_path = Path(__file__).resolve().parent / "config.json"
+with open(config_path) as f:
     config = json.load(f)
 
 region_name = config['region']
 components = config['components']
 roles = components['roles']
 security_groups = components['security_groups']
-file_name = "examples/project-json"
+file_name = str(Path(__file__).resolve().parents[1] / "examples" / "project-json")
 
 with Diagram(file_name, show=True):
     with Cluster(f"Region: {region_name}"):

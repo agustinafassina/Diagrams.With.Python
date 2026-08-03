@@ -1,8 +1,4 @@
-"""
-CI/CD: Bitbucket → Azure DevOps (build + release) → AWS.
-Build: Docker image to ECR; Terraform in pipeline. Release: branch → QA/Prod,
-terraform apply, infra docs, image scan reports, email (SES).
-"""
+from pathlib import Path
 from diagrams import Diagram, Cluster, Node
 from diagrams.onprem.vcs import Git
 from diagrams.onprem.container import Docker
@@ -15,9 +11,7 @@ from diagrams.aws.management import Cloudwatch
 from diagrams.aws.security import Inspector
 from diagrams.aws.engagement import SES
 
-folder_name = "examples"
-file_name = "ci-cd-bitbucket-azure-aws"
-full_name = f"{folder_name}/{file_name}"
+full_name = str(Path(__file__).resolve().parents[1] / "examples" / "ci-cd-bitbucket-azure-aws")
 
 with Diagram(full_name, show=False, direction="LR"):
     # Bitbucket has no icon in this library; Git icon + label is a common stand-in.

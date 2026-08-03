@@ -1,3 +1,4 @@
+from pathlib import Path
 from diagrams import Diagram, Cluster, Node
 from diagrams.aws.compute import EC2, ECS
 from diagrams.aws.network import ELB, Route53
@@ -6,9 +7,7 @@ from diagrams.aws.security import IAMRole, ACM
 from diagrams.aws.management import Cloudwatch
 from diagrams.aws.engagement import SES
 
-folder_name = "examples"
-file_name = "project-5"
-full_name = f"{folder_name}/{file_name}"
+full_name = str(Path(__file__).resolve().parents[1] / "examples" / "project-5")
 
 with Diagram(full_name, show=True):
     with Cluster("Region: us-east-1"):

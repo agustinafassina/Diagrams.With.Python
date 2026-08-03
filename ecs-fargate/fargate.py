@@ -1,12 +1,13 @@
+from pathlib import Path
 from diagrams import Diagram, Cluster, Node
 from diagrams.aws.compute import ECS, ECR, Fargate
 from diagrams.aws.network import VPC
 from diagrams.onprem.container import Docker
 from diagrams.aws.management import Cloudwatch
 
-file_name = "diagram"
+full_name = str(Path(__file__).resolve().parent / "diagram")
 
-with Diagram(file_name, show=True):
+with Diagram(full_name, show=True):
     with Cluster("Region: us-west-1"):
 
         vpc = VPC("VPC")
