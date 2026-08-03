@@ -1,1 +1,12 @@
-.venv
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+.DS_Store
+Thumbs.db
+
+# Graphviz intermediate sources (no extension) in the shared gallery
+examples/*
+!examples/*.png
+!examples/.gitkeep
