@@ -16,6 +16,7 @@ Collection of infrastructure diagrams built as code with [Diagrams](https://diag
 </div>
 <div align="left">
     <img src="examples/ci-cd-bitbucket-azure-aws.png" alt="CI/CD Bitbucket Azure DevOps AWS" width="520">
+    <img src="examples/multi-region-dr.png" alt="Multi-region DR with Route 53" width="520">
 </div>
 
 ### Repository layout
@@ -23,22 +24,23 @@ Collection of infrastructure diagrams built as code with [Diagrams](https://diag
 ```text
 Diagrams.With.Python/
 ├── requirements.txt
-├── examples/                         # Shared PNG gallery (samples, CI/CD, diagram-terra)
+├── LICENSE
+├── examples/                         # Shared PNG gallery
 ├── samples/                          # Small AWS topologies + JSON-driven diagram
-│   ├── config.json
-│   ├── json-read.py
-│   ├── project-2.py … project-5.py
-│   └── rds-ec2.py
-├── ci-cd/                            # Bitbucket → Azure DevOps → AWS (QA develop / Prod master)
-│   └── ci-cd-bitbucket-azure-aws.py
-├── multi-region-dr/                  # Route 53 failover across two AWS regions
-│   └── route53-failover.py
+├── ci-cd/                            # Bitbucket → Azure DevOps → AWS (QA / Prod)
+├── multi-region-dr/                  # Route 53 failover across two regions
+├── landing-zone/                     # Organizations, SSO, SCPs, accounts
+├── networking-vpc/                   # Public/private subnets, NAT, ALB, ECS
+├── observability/                    # CloudWatch, X-Ray, SNS, SES
+├── secrets-config/                   # Secrets Manager + SSM → ECS tasks
+├── public-api/                       # API Gateway + WAF + Cognito + ECS/Lambda
+├── data-pipeline/                    # S3 → Glue/Lambda → Athena / Redshift
+├── gitops-terraform/                 # Bitbucket → pipeline → S3 state + DynamoDB lock
 ├── diagram-terra/                    # Larger AWS / Azure DevOps style diagram
-│   └── diagram-terra.py
-├── big-diagram/                      # Extended gateway topology (+ local config.json)
+├── big-diagram/                      # Extended gateway topology
 ├── ec2-backup-with-s3/               # EC2 → S3 backup
 ├── ecs-fargate/                      # ECS Fargate
-└── with-docker/                      # Docker-related diagram (+ local config.json)
+└── with-docker/                      # Docker-related diagram
 ```
 
 | Folder | Script | Output |
@@ -47,6 +49,13 @@ Diagrams.With.Python/
 | `samples/` | `json-read.py` | `examples/project-json.png` |
 | `ci-cd/` | `ci-cd-bitbucket-azure-aws.py` | `examples/ci-cd-bitbucket-azure-aws.png` |
 | `multi-region-dr/` | `route53-failover.py` | `examples/multi-region-dr.png` |
+| `landing-zone/` | `organizations.py` | `examples/landing-zone.png` |
+| `networking-vpc/` | `vpc-public-private.py` | `examples/networking-vpc.png` |
+| `observability/` | `cloudwatch-xray.py` | `examples/observability.png` |
+| `secrets-config/` | `secrets-manager-ssm.py` | `examples/secrets-config.png` |
+| `public-api/` | `api-gateway-waf-cognito.py` | `examples/public-api.png` |
+| `data-pipeline/` | `s3-glue-athena.py` | `examples/data-pipeline.png` |
+| `gitops-terraform/` | `bitbucket-tf-state.py` | `examples/gitops-terraform.png` |
 | `diagram-terra/` | `diagram-terra.py` | `examples/diagram-terra.png` |
 | `big-diagram/` | `with-gateway.py` | `big-diagram/with-gateway-diagram.png` |
 | `ec2-backup-with-s3/` | `backup.py` | `ec2-backup-with-s3/backup.png` |
@@ -102,6 +111,7 @@ Conjunto de diagramas de infraestructura definidos como código con [Diagrams](h
 </div>
 <div align="left">
     <img src="examples/ci-cd-bitbucket-azure-aws.png" alt="CI/CD Bitbucket Azure DevOps AWS" width="520">
+    <img src="examples/multi-region-dr.png" alt="DR multi-región con Route 53" width="520">
 </div>
 
 ### Estructura del repositorio
@@ -109,22 +119,23 @@ Conjunto de diagramas de infraestructura definidos como código con [Diagrams](h
 ```text
 Diagrams.With.Python/
 ├── requirements.txt
-├── examples/                         # Galería PNG compartida (samples, CI/CD, diagram-terra)
+├── LICENSE
+├── examples/                         # Galería PNG compartida
 ├── samples/                          # Topologías AWS pequeñas + diagrama desde JSON
-│   ├── config.json
-│   ├── json-read.py
-│   ├── project-2.py … project-5.py
-│   └── rds-ec2.py
-├── ci-cd/                            # Bitbucket → Azure DevOps → AWS (QA develop / Prod master)
-│   └── ci-cd-bitbucket-azure-aws.py
-├── multi-region-dr/                  # Failover Route 53 entre dos regiones AWS
-│   └── route53-failover.py
+├── ci-cd/                            # Bitbucket → Azure DevOps → AWS (QA / Prod)
+├── multi-region-dr/                  # Failover Route 53 entre dos regiones
+├── landing-zone/                     # Organizations, SSO, SCPs, cuentas
+├── networking-vpc/                   # Subnets public/private, NAT, ALB, ECS
+├── observability/                    # CloudWatch, X-Ray, SNS, SES
+├── secrets-config/                   # Secrets Manager + SSM → tareas ECS
+├── public-api/                       # API Gateway + WAF + Cognito + ECS/Lambda
+├── data-pipeline/                    # S3 → Glue/Lambda → Athena / Redshift
+├── gitops-terraform/                 # Bitbucket → pipeline → state S3 + lock DynamoDB
 ├── diagram-terra/                    # Diagrama amplio AWS / Azure DevOps
-│   └── diagram-terra.py
-├── big-diagram/                      # Topología con gateway (+ config.json local)
+├── big-diagram/                      # Topología con gateway
 ├── ec2-backup-with-s3/               # Backup EC2 → S3
 ├── ecs-fargate/                      # ECS Fargate
-└── with-docker/                      # Diagrama con Docker (+ config.json local)
+└── with-docker/                      # Diagrama con Docker
 ```
 
 | Carpeta | Script | Salida |
@@ -133,6 +144,13 @@ Diagrams.With.Python/
 | `samples/` | `json-read.py` | `examples/project-json.png` |
 | `ci-cd/` | `ci-cd-bitbucket-azure-aws.py` | `examples/ci-cd-bitbucket-azure-aws.png` |
 | `multi-region-dr/` | `route53-failover.py` | `examples/multi-region-dr.png` |
+| `landing-zone/` | `organizations.py` | `examples/landing-zone.png` |
+| `networking-vpc/` | `vpc-public-private.py` | `examples/networking-vpc.png` |
+| `observability/` | `cloudwatch-xray.py` | `examples/observability.png` |
+| `secrets-config/` | `secrets-manager-ssm.py` | `examples/secrets-config.png` |
+| `public-api/` | `api-gateway-waf-cognito.py` | `examples/public-api.png` |
+| `data-pipeline/` | `s3-glue-athena.py` | `examples/data-pipeline.png` |
+| `gitops-terraform/` | `bitbucket-tf-state.py` | `examples/gitops-terraform.png` |
 | `diagram-terra/` | `diagram-terra.py` | `examples/diagram-terra.png` |
 | `big-diagram/` | `with-gateway.py` | `big-diagram/with-gateway-diagram.png` |
 | `ec2-backup-with-s3/` | `backup.py` | `ec2-backup-with-s3/backup.png` |
