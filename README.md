@@ -190,7 +190,3 @@ Además del PNG, Diagrams puede dejar el **fuente Graphviz** al lado (mismo nomb
 - Intro e instalación: [Diagrams — Getting started](https://diagrams.mingrammer.com/docs/getting-started/installation). Catálogo de nodos AWS: [AWS nodes](https://diagrams.mingrammer.com/docs/nodes/aws).
 
 **Versión:** 0.2.0
-
-### Licencia
-
-Publicado bajo la [licencia MIT](LICENSE). Copyright (c) 2026 Agustina Fassina.
