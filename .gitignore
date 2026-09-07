@@ -10,3 +10,4 @@ Thumbs.db
 examples/*
 !examples/*.png
 !examples/.gitkeep
+.vscode/
