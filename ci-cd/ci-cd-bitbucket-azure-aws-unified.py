@@ -10,6 +10,8 @@ from diagrams.aws.network import ELB
 from diagrams.aws.management import Cloudwatch
 from diagrams.aws.security import Inspector
 from diagrams.aws.engagement import SES
+from diagrams.onprem.security import Trivy
+from diagrams.saas.security import Sonarqube
 
 # Same pipeline as ci-cd-bitbucket-azure-aws.py, but QA and Prod are drawn as a single
 # environment: the branch only decides WHICH environment gets deployed, via a trigger.
@@ -63,6 +65,32 @@ with Diagram("CI/CD — Bitbucket → Azure DevOps → AWS (unified env)", filen
 
     bitbucket >> build >> release
 
+    # The trigger runs a Bitbucket pipeline with the scan tests; only if it passes
+    # does the flow continue to the deploy.
+    with Cluster("Bitbucket Pipelines — Scan tests"):
+        bb_pipeline = Git("bitbucket-pipelines.yml\n(custom: scan-tests)")
+        sast = Sonarqube("SAST / code quality")
+        image_scan = Trivy("Image & IaC scan")
+        gate = Node(
+            "Quality gate\n\nscans OK?",
+            **{**trigger_attrs, "fillcolor": "#E3F6E5", "color": "#2E9E44"},
+        )
+        blocked = Node(
+            "Deploy blocked\n(notify team)",
+            shape="box",
+            style="rounded,filled",
+            fillcolor="#FDE2E1",
+            color="#D93025",
+            fixedsize="false",
+            labelloc="c",
+            fontsize="12",
+        )
+
+        bb_pipeline >> sast >> gate
+        bb_pipeline >> image_scan >> gate
+        registry >> Edge(style="dashed") >> image_scan
+        gate >> Edge(xlabel="fail", fontcolor="#D93025", color="#D93025") >> blocked
+
     with Cluster("Deploy — environment (QA | Prod)"):
         env_tf = Terraform("terraform apply\n(-var-file=<env>.tfvars)")
         with Cluster("AWS <env>"):
@@ -82,4 +110,6 @@ with Diagram("CI/CD — Bitbucket → Azure DevOps → AWS (unified env)", filen
         env_tf >> ecs_svc
         env_tf >> asg
 
-    trigger >> Edge(label="env = qa | prod", style="bold", color="#E0A800") >> env_tf
+    # xlabel: with splines=ortho, regular edge labels drift away from their edge.
+    trigger >> Edge(xlabel="run scans\n(env = qa | prod)", fontcolor="#B08400", style="bold", color="#E0A800") >> bb_pipeline
+    gate >> Edge(xlabel="pass", fontcolor="#2E9E44", style="bold", color="#2E9E44") >> env_tf
